@@ -1,5 +1,5 @@
 // Create the map
-var map = L.map('map').setView([ /* Your Latitude */, /* Your Longitude */ ], /* Your Zoom Level */ );
+var map = L.map('map').setView([71.505, -3.09], 13));
 
 // Add a basemap tile layer (you can choose a different one if you like)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
