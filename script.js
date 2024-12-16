@@ -1,35 +1,40 @@
-// Create the map
-var map = L.map('map').setView([71.505, -3.09], 13);
+                      
+// Create the map and set its initial view
+var map = L.map('map').setView([51.505, -0.09], 13);
 
-// Add a basemap tile layer (you can choose a different one if you like)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// Add a basemap tile layer (this is your background layer)
+var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+}).addTo(map); // Automatically add this base layer to the map
 
+// Add another basemap as an option (e.g., a different style of basemap)
+var satelliteLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; OpenTopoMap contributors'
+});
 
-// Load your GeoJSON layers (replace with your actual file names)
-var layer1 = L.geoJSON(null); // Initialize empty layers
-var layer2 = L.geoJSON(null);
+// Create your GeoJSON layers (these will be toggleable)
+var layer1 = L.geoJSON(null, { style: { color: 'blue' } }).addTo(map); // Load data later
+var layer2 = L.geoJSON(null, { style: { color: 'green' } }).addTo(map); // Load data later
 
-fetch('layer1.geojson')
+// Load GeoJSON data for each layer
+fetch('layer1_data.geojson')
     .then(response => response.json())
-    .then(data => {
-         layer1.addData(data);
-    });
+    .then(data => layer1.addData(data)); // Add data to layer1
 
-fetch('layer2.geojson')
+fetch('layer2_data.geojson')
     .then(response => response.json())
-    .then(data => {
-        layer2.addData(data);
-    });
+    .then(data => layer2.addData(data)); // Add data to layer2
 
-
-
-
-// Create control for layer visibility
-var overlayMaps = {
-    "Layer 1": layer1,
-    "Layer 2": layer2
+// Create a layer control, allowing the user to toggle between base layers and GeoJSON layers
+var baseMaps = {
+    "OpenStreetMap": osmLayer,
+    "Satellite": satelliteLayer
 };
 
-L.control.layers(null, overlayMaps).addTo(map);
+var overlayMaps = {
+    "Blue Layer": layer1,
+    "Green Layer": layer2
+};
+
+// Add the layer control to the map
+L.control.layers(baseMaps, overlayMaps).addTo(map);
