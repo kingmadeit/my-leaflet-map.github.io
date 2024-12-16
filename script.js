@@ -17,11 +17,11 @@ var layer1 = L.geoJSON(null, { style: { color: 'blue' } }).addTo(map); // Load d
 var layer2 = L.geoJSON(null, { style: { color: 'green' } }).addTo(map); // Load data later
 
 // Load GeoJSON data for each layer
-fetch('layer1_data.geojson')
+fetch('layer1.geojson')
     .then(response => response.json())
     .then(data => layer1.addData(data)); // Add data to layer1
 
-fetch('layer2_data.geojson')
+fetch('layer2.geojson')
     .then(response => response.json())
     .then(data => layer2.addData(data)); // Add data to layer2
 
