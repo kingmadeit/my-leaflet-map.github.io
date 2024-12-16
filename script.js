@@ -3,12 +3,12 @@
 var map = L.map('map').setView([51.505, -0.09], 13);
 
 // Add a basemap tile layer (this is your background layer)
-var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var osmLayer = L.tileLayer('https://a.tile.openstreetmap.org/8/127/87.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map); // Automatically add this base layer to the map
 
 // Add another basemap as an option (e.g., a different style of basemap)
-var satelliteLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+var satelliteLayer = L.tileLayer('https://a.tile.openstreetmap.org/8/127/83.png', {
     attribution: 'Map data &copy; OpenTopoMap contributors'
 });
 
